@@ -22,7 +22,7 @@ public final class DefaultToast: Toastable {
         let configuration = ToastConfiguration(
             title: ToastTitleValue._default,
             body: message,
-            themeColor: ToastGlobalSettings.themeColor.info,
+            themeColor: ToastGlobalSettings.themeColor._default,
             themeFont: ToastGlobalSettings.themeFont,
             themeIcon: ToastGlobalSettings.themeIcon.info,
             cornerRadius: ToastGlobalSettings.cornerRadius

@@ -17,7 +17,24 @@ public class StandardToastView: UIToastView {
     public var closeIconView: UIImageView!
     
     override func apply(configuration: ToastConfiguration) {
+        
+        backgroundView = UIView()
+        addSubview(backgroundView)
+        
+        bodyLabel = UILabel()
+        addSubview(bodyLabel)
+        
+        typeIconView = UIImageView()
+        addSubview(typeIconView)
+        
+        titleLabel = UILabel()
+        addSubview(titleLabel)
+        
+        closeIconView = UIImageView()
+        addSubview(closeIconView)
+        
         configureBackgroundView(with: configuration)
+        
         
         configureBodyView(with: configuration)
         
@@ -29,6 +46,7 @@ public class StandardToastView: UIToastView {
         
         // if enableCloseIcon
         configureCloseIconView(with: configuration)
+        
     }
 }
 
@@ -39,8 +57,6 @@ extension StandardToastView {
     // MARK: Configurations
     
     private func configureBackgroundView(with configuration: ToastConfiguration) {
-        backgroundView = UIView()
-        addSubview(backgroundView)
         
         backgroundView.backgroundColor = configuration.themeColor.background
         backgroundView.layer.cornerRadius = configuration.cornerRadius
@@ -57,8 +73,6 @@ extension StandardToastView {
     }
     
     private func configureBodyView(with configuration: ToastConfiguration) {
-        bodyLabel = UILabel()
-        addSubview(bodyLabel)
         
         bodyLabel.text = configuration.body
         bodyLabel.font = configuration.themeFont.body
@@ -81,8 +95,6 @@ extension StandardToastView {
     }
     
     private func configureTypeIconView(with configuration: ToastConfiguration) {
-        typeIconView = UIImageView()
-        addSubview(typeIconView)
         
         typeIconView.tintColor = configuration.themeColor.typeIcon
         
@@ -101,8 +113,6 @@ extension StandardToastView {
     }
     
     private func configureTitleView(with configuration: ToastConfiguration) {
-        titleLabel = UILabel()
-        addSubview(titleLabel)
         
         titleLabel.text = configuration.title
         titleLabel.font = configuration.themeFont.title
@@ -120,8 +130,6 @@ extension StandardToastView {
     }
     
     private func configureCloseIconView(with configuration: ToastConfiguration) {
-        closeIconView = UIImageView()
-        addSubview(closeIconView)
         
         closeIconView.image = configuration.themeIcon.close
         closeIconView.tintColor = configuration.themeColor.closeIcon

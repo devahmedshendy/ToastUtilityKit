@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ProgressUtilityKit
 
 public class StandardToastView: UIToastView {
     
@@ -15,8 +16,19 @@ public class StandardToastView: UIToastView {
     public var titleLabel: UILabel!
     public var typeIconView: UIImageView!
     public var closeIconView: UIImageView!
+    public var progressView: PUBorderedWipe!
     
-    override func apply(configuration: ToastConfiguration) {
+    // MARK: init
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func apply(configuration: StandardToastConfiguration) {
         
         backgroundView = UIView()
         addSubview(backgroundView)
@@ -33,6 +45,9 @@ public class StandardToastView: UIToastView {
         closeIconView = UIImageView()
         addSubview(closeIconView)
         
+        progressView = PUBorderedWipe()
+        addSubview(progressView)
+        
         configureBackgroundView(with: configuration)
         
         
@@ -44,9 +59,12 @@ public class StandardToastView: UIToastView {
         // if enableTitleView
         configureTitleView(with: configuration)
         
-        // if enableCloseIcon
-        configureCloseIconView(with: configuration)
-        
+        if configuration.autoHide {
+            configureWipeProgressView(with: configuration)
+            bindToProgressView()
+        } else {
+            configureCloseIconView(with: configuration)
+        }
     }
 }
 
@@ -56,7 +74,7 @@ extension StandardToastView {
     
     // MARK: Configurations
     
-    private func configureBackgroundView(with configuration: ToastConfiguration) {
+    private func configureBackgroundView(with configuration: StandardToastConfiguration) {
         
         backgroundView.backgroundColor = configuration.themeColor.background
         backgroundView.layer.cornerRadius = configuration.cornerRadius
@@ -72,7 +90,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureBodyView(with configuration: ToastConfiguration) {
+    private func configureBodyView(with configuration: StandardToastConfiguration) {
         
         bodyLabel.text = configuration.body
         bodyLabel.font = configuration.themeFont.body
@@ -94,7 +112,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureTypeIconView(with configuration: ToastConfiguration) {
+    private func configureTypeIconView(with configuration: StandardToastConfiguration) {
         
         typeIconView.tintColor = configuration.themeColor.typeIcon
         
@@ -112,7 +130,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureTitleView(with configuration: ToastConfiguration) {
+    private func configureTitleView(with configuration: StandardToastConfiguration) {
         
         titleLabel.text = configuration.title
         titleLabel.font = configuration.themeFont.title
@@ -129,7 +147,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureCloseIconView(with configuration: ToastConfiguration) {
+    private func configureCloseIconView(with configuration: StandardToastConfiguration) {
         
         closeIconView.image = configuration.themeIcon.close
         closeIconView.tintColor = configuration.themeColor.closeIcon
@@ -144,6 +162,25 @@ extension StandardToastView {
             closeIconView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10.0),
             closeIconView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 10.0)
         ])
+    }
+    
+    private func configureWipeProgressView(with configuration: StandardToastConfiguration) {
+        progressView.color = configuration.themeColor.progress
+        progressView.duration = configuration.duration
+        
+        // Constraint Configuration
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10.0),
+            progressView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 10.0),
+            progressView.widthAnchor.constraint(equalToConstant: 15),
+            progressView.heightAnchor.constraint(equalToConstant: 15)
+        ])
+    }
+    
+    private func bindToProgressView() {
+        progressView.onFinish = { [weak self] in self?.onFinish?() }
     }
     
 }

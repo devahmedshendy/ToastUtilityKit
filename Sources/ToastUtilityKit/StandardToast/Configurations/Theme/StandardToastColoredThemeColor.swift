@@ -5,7 +5,7 @@
 //  Created by Ahmed Shendy on 11/1/21.
 //
 
-class ColoredToastThemeColor: ToastThemeColor {
+class StandardToastColoredThemeColor: StandardToastThemeColor {
     
     /*
      View       : Light           : Dark
@@ -15,7 +15,7 @@ class ColoredToastThemeColor: ToastThemeColor {
      TypeIcon   : White             : Primary Color
      CloseIcon  : White             : Primary Color
      Background : Primary Color     : Primary Default
-     Progress   : Secondary Color   : Primary Color (except DefaultToast still secondary)
+     Progress   : Secondary Color   : Primary Color (DefaultToast keeps 'Secondary Color')
      */
     
     

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ProgressUtilityKit",
+        "repositoryURL": "https://github.com/devahmedshendy/ProgressUtilityKit.git",
+        "state": {
+          "branch": null,
+          "revision": "25e2955613c26f428fe19a585fa8613bb99397f6",
+          "version": "0.0.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

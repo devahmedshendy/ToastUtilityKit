@@ -1,5 +1,5 @@
 //
-//  BasicToastThemeColor.swift
+//  ToastThemeColor.swift
 //  
 //
 //  Created by Ahmed Shendy on 11/1/21.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BasicToastThemeColor: ToastThemeColor {
+public class StandardToastThemeColor {
     
     /*
      View       : Light           : Dark
@@ -21,8 +21,10 @@ class BasicToastThemeColor: ToastThemeColor {
      Progress   : Primary Color     : Primary Color
      */
     
-    override public class var _default: ToastThemeColor {
-        return ToastThemeColor.builder
+    // MARK: - ThemeColor Types
+    
+    public class var _default: StandardToastThemeColor {
+        return StandardToastThemeColor.builder
             .setTitle(light: .primaryDefault, dark: .primaryDefault)
             .setBody(light: .primaryDefault, dark: .primaryDefault)
             .setTypeIcon(light: .primaryDefault, dark: .primaryDefault)
@@ -32,8 +34,8 @@ class BasicToastThemeColor: ToastThemeColor {
             .build()
     }
     
-    override public class var info: ToastThemeColor {
-        return ToastThemeColor.builder
+    public class var info: StandardToastThemeColor {
+        return StandardToastThemeColor.builder
             .setTitle(light: .primaryDefault, dark: .primaryDefault)
             .setBody(light: .primaryDefault, dark: .primaryDefault)
             .setTypeIcon(light: .primaryBlue, dark: .primaryBlue)
@@ -44,5 +46,19 @@ class BasicToastThemeColor: ToastThemeColor {
         
     }
     
+    // MARK: - Properties
+    
+    public var title: UIColor!
+    public var body: UIColor!
+    public var typeIcon: UIColor!
+    public var closeIcon: UIColor!
+    public var background: UIColor!
+    public var progress: UIColor!
+    
 }
 
+extension StandardToastThemeColor {
+    static var builder: StandardToastTitleColorBuilder {
+        return StandardToastTitleColorBuilder()
+    }
+}

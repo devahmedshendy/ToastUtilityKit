@@ -25,7 +25,11 @@ public class UIToastView: UIView {
         super.init(coder: coder)
     }
     
-    func apply(configuration: ToastConfiguration) {
+    // MARK: - API
+    
+    var onFinish: (() -> Void)?
+    
+    func apply(configuration: StandardToastConfiguration) {
         // Do nothing
     }
     

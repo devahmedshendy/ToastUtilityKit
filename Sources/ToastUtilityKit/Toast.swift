@@ -12,6 +12,10 @@ public final class Toast {
     
     //MARK: - Make
     
+//    public static func make(containerView: UIView, message: String) -> AndroidLikeToast {
+//        return AndroidLikeToast(...)
+//    }
+    
     public static func makeDefault(containerView: UIView, message: String) -> Toastable {
         return DefaultToast(containerView: containerView, message: message)
     }
@@ -20,5 +24,3 @@ public final class Toast {
         return InfoToast(containerView: containerView, message: message)
     }
 }
-
-

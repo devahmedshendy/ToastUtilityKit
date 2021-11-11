@@ -10,5 +10,5 @@ import UIKit
 
 public protocol ToastShowable {
     func show()
-    func show(completion: @escaping () -> Void)
+    func show(_ completion: @escaping () -> Void)
 }

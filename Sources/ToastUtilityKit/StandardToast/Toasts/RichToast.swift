@@ -47,7 +47,7 @@ extension RichToast {
         ])
     }
     
-    func show(completion: @escaping () -> Void) {
+    func show(_ completion: @escaping () -> Void) {
         show()
         
         toastView.onHidden = { [weak self] in

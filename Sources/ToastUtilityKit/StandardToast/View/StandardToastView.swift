@@ -180,7 +180,7 @@ extension StandardToastView {
     }
     
     private func bindToProgressView() {
-        progressView.onFinish = { [weak self] in self?.onFinish?() }
+        progressView.onFinish = { [weak self] in self?.onHidden?() }
     }
     
 }

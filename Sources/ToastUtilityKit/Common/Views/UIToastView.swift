@@ -27,7 +27,7 @@ public class UIToastView: UIView {
     
     // MARK: - API
     
-    var onFinish: (() -> Void)?
+    var onHidden: (() -> Void)?
     
     func apply(configuration: StandardToastConfiguration) {
         // Do nothing

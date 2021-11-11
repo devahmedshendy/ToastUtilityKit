@@ -8,8 +8,13 @@
 import Foundation
 import UIKit
 
-public protocol StandardToastable: Toastable {
-
+public protocol StandardToastable: Toastable, ToastSkeleton {
+    var configuration: StandardToastConfiguration { get set }
+    
+    func setThemeColor(to new: StandardToastThemeColor.Type) -> Toastable
+    func setThemeFont(to new: StandardToastThemeFont.Type) -> Toastable
+    func setAutoHide(to new: Bool) -> Toastable
+    func setDuration(to new: Double) -> Toastable
 }
 
 // MARK: - Default Implementation
@@ -37,6 +42,7 @@ public extension StandardToastable {
         
         containerView.addSubview(toastView)
         
+        // Constraint Configuration
         toastView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -49,7 +55,7 @@ public extension StandardToastable {
     func show(completion: @escaping () -> Void) {
         show()
         
-        toastView.onFinish = { [weak self] in
+        toastView.onHidden = { [weak self] in
             self?.toastView.removeFromSuperview()
             completion()
         }

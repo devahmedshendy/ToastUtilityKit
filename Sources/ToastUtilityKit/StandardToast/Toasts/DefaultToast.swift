@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public final class DefaultToast: Toastable {
+public final class DefaultToast: StandardToastable {
     
     //MARK: - Properties
     

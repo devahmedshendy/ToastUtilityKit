@@ -8,20 +8,30 @@
 import Foundation
 import UIKit
 
-public protocol StandardToastSettable: Toastable {
+public protocol StandardToastable: Toastable {
 
-    func setThemeColor(to new: StandardToastThemeColor.Type) -> StandardToastSettable
-    func setThemeFont(to new: StandardToastThemeFont.Type) -> StandardToastSettable
-    func setAutoHide(to new: Bool) -> StandardToastSettable
-    func setDuration(to new: Double) -> StandardToastSettable
-    
 }
 
 // MARK: - Default Implementation
 
-public extension StandardToastSettable {
+public extension StandardToastable {
     
-    func show() -> ToastEventBinding {
+    func setThemeFont(to new: StandardToastThemeFont.Type) -> Toastable {
+        configuration = configuration.setThemeFont(to: new)
+        return self
+    }
+    
+    func setAutoHide(to new: Bool) -> Toastable {
+        configuration = configuration.setAutoHide(to: new)
+        return self
+    }
+    
+    func setDuration(to new: Double) -> Toastable {
+        configuration = configuration.setDuration(to: new)
+        return self
+    }
+    
+    func show() {
         toastView = StandardToastDefaults.toastView.init()
         toastView.apply(configuration: configuration)
         
@@ -34,30 +44,15 @@ public extension StandardToastSettable {
             toastView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             toastView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor)
         ])
-        
-        return self
     }
     
-    func onHide(completion: @escaping () -> Void) {
+    func show(completion: @escaping () -> Void) {
+        show()
+        
         toastView.onFinish = { [weak self] in
             self?.toastView.removeFromSuperview()
             completion()
         }
     }
-
-    func setThemeFont(to new: StandardToastThemeFont.Type) -> StandardToastSettable {
-        configuration = configuration.setThemeFont(to: new)
-        return self
-    }
     
-    func setAutoHide(to new: Bool) -> StandardToastSettable {
-        configuration = configuration.setAutoHide(to: new)
-        return self
-    }
-    
-    func setDuration(to new: Double) -> StandardToastSettable {
-        configuration = configuration.setDuration(to: new)
-        return self
-    }
-
 }

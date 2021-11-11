@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public final class InfoToast: Toastable {
+public final class InfoToast: StandardToastable {
     
     //MARK: - Properties
     

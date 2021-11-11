@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol RichToastable: AnyObject, Toastable {
+public protocol RichToastable: AnyObject, Toastable {
     var configuration: RichToastConfiguration { get set }
     var containerView: UIView { get set }
     var toastView: RichToastView { get set }

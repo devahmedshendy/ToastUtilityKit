@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import ProgressUtilityKit
 
-class RichToastView: UIView {
+public final class RichToastView: UIView {
     
     // MARK: - API
     

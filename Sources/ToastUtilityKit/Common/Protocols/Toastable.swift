@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public protocol Toastable {
+public protocol ToastShowable {
     func show()
     func show(completion: @escaping () -> Void)
 }

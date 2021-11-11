@@ -35,7 +35,7 @@ final class DefaultToast: RichToast {
         self.toastView = RichToastView()
     }
     
-    func setThemeColor(to new: RichToastThemeColor.Type) -> Toastable {
+    func setThemeColor(to new: RichToastThemeColor.Type) -> ToastShowable {
         configuration = configuration.setThemeColor(to: new._default)
         return self
     }

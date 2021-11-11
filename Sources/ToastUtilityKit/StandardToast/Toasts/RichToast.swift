@@ -1,5 +1,5 @@
 //
-//  Toastable.swift
+//  RichToast.swift
 //  
 //
 //  Created by Ahmed Shendy on 11/1/21.
@@ -20,18 +20,18 @@ protocol RichToast: AnyObject, RichToastConfigurable {
 
 extension RichToast {
     
-    func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable {
+    func setThemeFont(to new: RichToastThemeFont.Type) -> ToastShowable {
         configuration = configuration.setThemeFont(to: new)
         return self
     }
     
-    func enableProgress(style: ToastProgressStyle, duration: TimeInterval = 3) -> Toastable {
+    func enableProgress(style: ToastProgressStyle, duration: TimeInterval = 3) -> ToastShowable {
         configuration.progressStyle = style
         configuration.progressDuration = duration
         return self
     }
     
-    // MARK: - Toastable Default Implementation
+    // MARK: - ToastShowable Default Implementation
     func show() {
         toastView.apply(configuration: configuration)
         

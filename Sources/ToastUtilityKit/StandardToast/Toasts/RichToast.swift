@@ -8,21 +8,17 @@
 import Foundation
 import UIKit
 
-public protocol RichToastable: AnyObject, Toastable {
+protocol RichToast: AnyObject, RichToastConfigurable, Toastable {
     var configuration: RichToastConfiguration { get set }
     var containerView: UIView { get set }
     var toastView: RichToastView { get set }
     
     init(containerView: UIView, message: String)
-    
-    func setThemeColor(to new: RichToastThemeColor.Type) -> Toastable
-    func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable
-    func enableProgress(style: ToastProgressStyle, duration: TimeInterval) -> Toastable
 }
 
 // MARK: - Default Implementation
 
-extension RichToastable {
+extension RichToast {
     
     func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable {
         configuration = configuration.setThemeFont(to: new)

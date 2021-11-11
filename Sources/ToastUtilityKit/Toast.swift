@@ -16,11 +16,11 @@ public final class Toast {
 //        return AndroidLikeToast(...)
 //    }
     
-    public static func makeDefault(containerView: UIView, message: String) -> Toastable {
+    public static func makeDefault(containerView: UIView, message: String) -> RichToastConfigurable {
         return DefaultToast(containerView: containerView, message: message)
     }
     
-    public static func makeInfo(containerView: UIView, message: String) -> Toastable {
+    public static func makeInfo(containerView: UIView, message: String) -> RichToastConfigurable {
         return InfoToast(containerView: containerView, message: message)
     }
 }

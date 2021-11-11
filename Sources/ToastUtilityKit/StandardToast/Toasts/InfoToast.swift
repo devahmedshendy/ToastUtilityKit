@@ -41,6 +41,3 @@ public final class InfoToast: Toastable {
     }
 
 }
-
-Toast
-    .makeDefault(containerView: UIView(), message: "")

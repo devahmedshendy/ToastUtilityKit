@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol RichToastConfigurable {
+public protocol RichToastConfigurable: Toastable {
     func setThemeColor(to new: RichToastThemeColor.Type) -> Toastable
     func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable
     func enableProgress(style: ToastProgressStyle, duration: TimeInterval) -> Toastable

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class StandardToastThemeColor {
+public class RichToastThemeColor {
     
     /*
      View       : Light           : Dark
@@ -23,8 +23,8 @@ public class StandardToastThemeColor {
     
     // MARK: - ThemeColor Types
     
-    public class var _default: StandardToastThemeColor {
-        return StandardToastThemeColor.builder
+    public class var _default: RichToastThemeColor {
+        return RichToastThemeColor.builder
             .setTitle(light: .primaryDefault, dark: .primaryDefault)
             .setBody(light: .primaryDefault, dark: .primaryDefault)
             .setTypeIcon(light: .primaryDefault, dark: .primaryDefault)
@@ -34,8 +34,8 @@ public class StandardToastThemeColor {
             .build()
     }
     
-    public class var info: StandardToastThemeColor {
-        return StandardToastThemeColor.builder
+    public class var info: RichToastThemeColor {
+        return RichToastThemeColor.builder
             .setTitle(light: .primaryDefault, dark: .primaryDefault)
             .setBody(light: .primaryDefault, dark: .primaryDefault)
             .setTypeIcon(light: .primaryBlue, dark: .primaryBlue)
@@ -57,8 +57,8 @@ public class StandardToastThemeColor {
     
 }
 
-extension StandardToastThemeColor {
-    static var builder: StandardToastTitleColorBuilder {
-        return StandardToastTitleColorBuilder()
+extension RichToastThemeColor {
+    static var builder: RichToastTitleColorBuilder {
+        return RichToastTitleColorBuilder()
     }
 }

@@ -8,34 +8,34 @@
 import Foundation
 import UIKit
 
-public final class DefaultToast: StandardToastable {
+final class DefaultToast: RichToastable {
     
     //MARK: - Properties
     
-    public var configuration: StandardToastConfiguration
-    public var containerView: UIView
-    public var toastView: UIToastView
+    var configuration: RichToastConfiguration
+    var containerView: UIView
+    var toastView: RichToastView
     
     //MARK: - init Methods
     
-    public init(containerView: UIView, message: String) {
-        let configuration = StandardToastConfiguration(
+    init(containerView: UIView, message: String) {
+        let configuration = RichToastConfiguration(
             title: ToastTitleValue._default,
             body: message,
-            themeColor: StandardToastDefaults.themeColor._default,
-            themeFont: StandardToastDefaults.themeFont,
-            themeIcon: StandardToastDefaults.themeIcon.info,
-            cornerRadius: StandardToastDefaults.cornerRadius,
-            autoHide: StandardToastDefaults.autoHide,
-            duration: StandardToastDefaults.duration
+            themeColor: RichToastDefaults.themeColor._default,
+            themeFont: RichToastDefaults.themeFont,
+            themeIcon: RichToastDefaults.themeIcon.info,
+            cornerRadius: RichToastDefaults.cornerRadius,
+            progressStyle: RichToastDefaults.progressStyle,
+            progressDuration: RichToastDefaults.progressDuration
         )
         
         self.containerView = containerView
         self.configuration = configuration
-        self.toastView = StandardToastDefaults.toastView.init()
+        self.toastView = RichToastView()
     }
     
-    public func setThemeColor(to new: StandardToastThemeColor.Type) -> Toastable {
+    func setThemeColor(to new: RichToastThemeColor.Type) -> Toastable {
         configuration = configuration.setThemeColor(to: new._default)
         return self
     }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class StandardToastThemeFont {
+public class RichToastThemeFont {
     
     public class var title: UIFont {
         return .boldSystemFont(ofSize: 18)

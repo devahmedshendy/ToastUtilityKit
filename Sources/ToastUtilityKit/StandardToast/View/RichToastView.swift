@@ -1,5 +1,5 @@
 //
-//  StandardToastView.swift
+//  RichToastView.swift
 //  
 //
 //  Created by Ahmed Shendy on 11/1/21.
@@ -9,26 +9,13 @@ import Foundation
 import UIKit
 import ProgressUtilityKit
 
-public class StandardToastView: UIToastView {
+class RichToastView: UIView {
     
-    // MARK: - SubViews
+    // MARK: - API
     
-    public var titleLabel: UILabel!
-    public var typeIconView: UIImageView!
-    public var closeIconView: UIImageView!
-    public var progressView: PUBorderedWipe!
+    var onHidden: (() -> Void)?
     
-    // MARK: init
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func apply(configuration: StandardToastConfiguration) {
+    func apply(configuration: RichToastConfiguration) {
         
         backgroundView = UIView()
         addSubview(backgroundView)
@@ -59,22 +46,46 @@ public class StandardToastView: UIToastView {
         // if enableTitleView
         configureTitleView(with: configuration)
         
-        if configuration.autoHide {
-            configureWipeProgressView(with: configuration)
-            bindToProgressView()
-        } else {
+        if configuration.progressStyle == .none {
             configureCloseIconView(with: configuration)
+            
+        } else if configuration.progressStyle == .wipe {
+            configureWipeProgressView(with: configuration)
+            bindToLinearProgressView()
+        } else if configuration.progressStyle == .linear {
+//            configureLinearProgressView(with: configuration)
+//            bindToLinearProgressView()
         }
     }
+    
+    // MARK: - SubViews
+    
+    var backgroundView: UIView!
+    var titleLabel: UILabel!
+    var bodyLabel: UILabel!
+    var typeIconView: UIImageView!
+    var closeIconView: UIImageView!
+    var progressView: PUBorderedWipe!
+    
+    // MARK: init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
 }
 
 //MARK: - SubViews Configurations
 
-extension StandardToastView {
+extension RichToastView {
     
     // MARK: Configurations
     
-    private func configureBackgroundView(with configuration: StandardToastConfiguration) {
+    private func configureBackgroundView(with configuration: RichToastConfiguration) {
         
         backgroundView.backgroundColor = configuration.themeColor.background
         backgroundView.layer.cornerRadius = configuration.cornerRadius
@@ -90,7 +101,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureBodyView(with configuration: StandardToastConfiguration) {
+    private func configureBodyView(with configuration: RichToastConfiguration) {
         
         bodyLabel.text = configuration.body
         bodyLabel.font = configuration.themeFont.body
@@ -112,7 +123,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureTypeIconView(with configuration: StandardToastConfiguration) {
+    private func configureTypeIconView(with configuration: RichToastConfiguration) {
         
         typeIconView.tintColor = configuration.themeColor.typeIcon
         
@@ -130,7 +141,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureTitleView(with configuration: StandardToastConfiguration) {
+    private func configureTitleView(with configuration: RichToastConfiguration) {
         
         titleLabel.text = configuration.title
         titleLabel.font = configuration.themeFont.title
@@ -147,7 +158,7 @@ extension StandardToastView {
         ])
     }
     
-    private func configureCloseIconView(with configuration: StandardToastConfiguration) {
+    private func configureCloseIconView(with configuration: RichToastConfiguration) {
         
         closeIconView.image = configuration.themeIcon.close
         closeIconView.tintColor = configuration.themeColor.closeIcon
@@ -164,9 +175,9 @@ extension StandardToastView {
         ])
     }
     
-    private func configureWipeProgressView(with configuration: StandardToastConfiguration) {
+    private func configureWipeProgressView(with configuration: RichToastConfiguration) {
         progressView.color = configuration.themeColor.progress
-        progressView.duration = configuration.duration
+        progressView.duration = configuration.progressDuration
         
         // Constraint Configuration
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +190,7 @@ extension StandardToastView {
         ])
     }
     
-    private func bindToProgressView() {
+    private func bindToLinearProgressView() {
         progressView.onFinish = { [weak self] in self?.onHidden?() }
     }
     

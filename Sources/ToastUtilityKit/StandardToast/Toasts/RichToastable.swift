@@ -8,36 +8,35 @@
 import Foundation
 import UIKit
 
-public protocol StandardToastable: Toastable, ToastSkeleton {
-    var configuration: StandardToastConfiguration { get set }
+protocol RichToastable: AnyObject, Toastable {
+    var configuration: RichToastConfiguration { get set }
+    var containerView: UIView { get set }
+    var toastView: RichToastView { get set }
     
-    func setThemeColor(to new: StandardToastThemeColor.Type) -> Toastable
-    func setThemeFont(to new: StandardToastThemeFont.Type) -> Toastable
-    func setAutoHide(to new: Bool) -> Toastable
-    func setDuration(to new: Double) -> Toastable
+    init(containerView: UIView, message: String)
+    
+    func setThemeColor(to new: RichToastThemeColor.Type) -> Toastable
+    func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable
+    func enableProgress(style: ToastProgressStyle, duration: TimeInterval) -> Toastable
 }
 
 // MARK: - Default Implementation
 
-public extension StandardToastable {
+extension RichToastable {
     
-    func setThemeFont(to new: StandardToastThemeFont.Type) -> Toastable {
+    func setThemeFont(to new: RichToastThemeFont.Type) -> Toastable {
         configuration = configuration.setThemeFont(to: new)
         return self
     }
     
-    func setAutoHide(to new: Bool) -> Toastable {
-        configuration = configuration.setAutoHide(to: new)
+    func enableProgress(style: ToastProgressStyle, duration: TimeInterval = 3) -> Toastable {
+        configuration.progressStyle = style
+        configuration.progressDuration = duration
         return self
     }
     
-    func setDuration(to new: Double) -> Toastable {
-        configuration = configuration.setDuration(to: new)
-        return self
-    }
-    
+    // MARK: - Toastable Default Implementation
     func show() {
-        toastView = StandardToastDefaults.toastView.init()
         toastView.apply(configuration: configuration)
         
         containerView.addSubview(toastView)

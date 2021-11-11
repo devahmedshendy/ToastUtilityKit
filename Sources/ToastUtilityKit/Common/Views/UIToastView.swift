@@ -29,7 +29,7 @@ public class UIToastView: UIView {
     
     var onHidden: (() -> Void)?
     
-    func apply(configuration: StandardToastConfiguration) {
+    func apply(configuration: RichToastConfiguration) {
         // Do nothing
     }
     

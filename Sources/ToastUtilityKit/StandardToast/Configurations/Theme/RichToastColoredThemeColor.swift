@@ -5,7 +5,7 @@
 //  Created by Ahmed Shendy on 11/1/21.
 //
 
-class StandardToastColoredThemeColor: StandardToastThemeColor {
+class RichToastColoredThemeColor: RichToastThemeColor {
     
     /*
      View       : Light           : Dark

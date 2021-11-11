@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-public class StandardToastThemeIcon {
+public class RichToastThemeIcon {
     
-    public class var info: StandardToastThemeIcon {
-        return StandardToastThemeIcon
+    public class var info: RichToastThemeIcon {
+        return RichToastThemeIcon
             .builder
             .setTypeIcon(UIImage(systemName: "info.circle.fill")!)
             .setCloseIcon(UIImage(systemName: "xmark")!)
@@ -23,8 +23,8 @@ public class StandardToastThemeIcon {
     
 }
 
-extension StandardToastThemeIcon {
-    static var builder: StandardToastTypeIconBuildable {
-        return StandardToastTypeIconBuilder()
+extension RichToastThemeIcon {
+    static var builder: RichToastTypeIconBuildable {
+        return RichToastTypeIconBuilder()
     }
 }
